@@ -8,14 +8,15 @@
   width: 100%;
   background-color: #CFEFC1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.index #app {
+.index .controls, .index .stopwatch, .index .results {
   padding: 0;
   padding: 20px;
-  width: 25%;
+  width: 60%;
   display: -webkit-flex;
   display: flex;
   justify-content: center;
@@ -24,23 +25,35 @@
   background-color: #93DD73;
 }
 
-.index #app div {
-  background-color: red;
+.index .controls .button, .index .stopwatch .button, .index .results .button {
+  margin: 5px;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 3px;
+  border: none;
+  font: bold 13px Verdana, sans-serif;
+  color: #004C39;
+  background-color: #59AA96;
+  box-shadow: 2px 6px 8px rgba(0, 76, 57, 0.25);
+  text-decoration: none;
 }
 
-.index #app div h1 {
+.index .stopwatch {
+  color: #004C39;
+  font: 26px Verdana, sans-serif;
+  background-color: #ADD7CC;
+}
+
+.index .results {
+  margin: 0;
+}
+
+.index .results li {
+  width: 100%;
   color: #004C39;
   font: 20px Verdana, sans-serif;
-}
-
-.index #app div input {
-  margin: 5px 0;
-  padding: 5px;
-  width: 100%;
-  border-radius: 3px;
-  border: 2px solid #59AA96;
-  background-color: #ADD7CC;
-  color: #004C39;
+  list-style: none;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,7 +1,8 @@
 class Stopwatch {
-    constructor(display) {
+    constructor(display, results) {
         this.running = false;
         this.display = display;
+        this.results = results;
         this.reset();
         this.print(this.times);
     }
@@ -13,7 +14,7 @@ class Stopwatch {
             miliseconds: 0
         };
     }
-    
+
     pad0(value) {
         let result = value.toString();
         if (result.length < 2) {
@@ -21,9 +22,9 @@ class Stopwatch {
         }
         return result;
     }
-
+    
     format(times) {
-        return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
+        return `${this.pad0(times.minutes)}:${this.pad0(times.seconds)}:${this.pad0(Math.floor(times.miliseconds))}`;
     }
 
     print() {
@@ -60,17 +61,51 @@ class Stopwatch {
         clearInterval(this.watch);
     }
 
+    resetCounter() {
+        if (!this.running) {
+            this.reset();
+            this.print();
+        }
+    }
+
+    addResult() {
+        this.results.innerHTML += `<li>${this.format(this.times)}</li>`
+    }
+
+    resetResult() {
+        this.results.innerHTML = '';
+    }
 }
 
 const stopwatch = new Stopwatch(
-document.querySelector('.stopwatch'));
+document.querySelector('.stopwatch'),document.querySelector('.results'));
 
 let startButton = document.getElementById('start');
-startButton.addEventListener('click', () => stopwatch.start());
+startButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    stopwatch.start();
+});
 
 let stopButton = document.getElementById('stop');
-stopButton.addEventListener('click', () => stopwatch.stop());
+stopButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    stopwatch.stop();
+});
 
+let resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    stopwatch.resetCounter();
+});
 
+let addButton = document.getElementById('add');
+addButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    stopwatch.addResult();
+});
 
-
+let resetListButton = document.getElementById('resetList');
+resetListButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    stopwatch.resetResult();
+});
